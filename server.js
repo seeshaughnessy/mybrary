@@ -3,9 +3,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express')
-const app = express()
 const expressLayouts = require('express-ejs-layouts')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
+const app = express()
 
 // Set up routers
 const indexRouter = require('./routes/index')
@@ -21,6 +22,7 @@ app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(express.static('public'))
 
+app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
 
 // Set up mongoose
